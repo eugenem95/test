@@ -8,47 +8,25 @@ import java.util.HashMap;
  */
 
 public class RecyclerData {
-    private HashMap<Integer, RecyclerItem> dataset;
+    private ArrayList<RecyclerItem> dataset;
 
     public RecyclerData(){
-        dataset = new HashMap<>();
+        dataset = new ArrayList<>();
     }
 
-    /**
-     * Item will be added in any case, whether its parent exists or not
-     * @param id
-     * @param name
-     * @param parentID
-     */
     public void addItem(int id, String name, int parentID){
-        addItem(id, name);
-        if(dataset.containsKey(parentID)){
-            RecyclerItem itemParent = dataset.get(parentID);
-            itemParent.addChildren(id);
-        }
+        dataset.add(new RecyclerItem(id, name, parentID));
     }
 
     public void addItem(int id, String name){
-        RecyclerItem item = new RecyclerItem(id,name);
-        dataset.put(id, item);
+        dataset.add(new RecyclerItem(id, name));
     }
 
-    public RecyclerItem getItemById(int id){
-        return dataset.get(id);
+    public RecyclerItem get(int index){
+        return dataset.get(index);
     }
 
-    /**
-     * Return item as a first element and its children
-     * @param id
-     * @return
-     */
-    public ArrayList<RecyclerItem> getItemsGroup(int id){
-        RecyclerItem parentItem = dataset.get(id);
-        ArrayList<RecyclerItem> items = new ArrayList<>();
-        items.add(parentItem);
-        for(Integer childId : parentItem.getChildrenIds()){
-            items.add(dataset.get(childId));
-        }
-        return items;
+    public int getSize(){
+        return dataset.size();
     }
 }

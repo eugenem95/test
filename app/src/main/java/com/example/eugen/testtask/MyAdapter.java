@@ -18,7 +18,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private RecyclerView mRecyclerView;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
         public TextView mTextView;
         public ViewHolder(View v) {
             super(v);
@@ -34,31 +33,49 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.view_holder_layout, parent, false);
 
-        v.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int itemPosition = mRecyclerView.getChildLayoutPosition(view);
-                String item = mDataset[itemPosition];
-                Toast.makeText(mRecyclerView.getContext(), item, Toast.LENGTH_SHORT).show();
-            }
-        });
-        ViewHolder vh = new ViewHolder(v);
+        ViewHolder vh = null;
+        switch (viewType){
+            case RecyclerItem.ITEM_CHILD:
+                View vChild = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.child_view_holder_layout, parent, false);
+                vh = new ViewHolder(vChild);
+                break;
+
+            case RecyclerItem.ITEM_PARENT:
+                View vParent = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.view_holder_layout, parent, false);
+                vh = new ViewHolder(vParent);
+                break;
+        }
+
+
+
+//        v.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                int itemPosition = mRecyclerView.getChildLayoutPosition(view);
+//                String item = mDataset[itemPosition];
+//                Toast.makeText(mRecyclerView.getContext(), item, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
 
         return vh;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mTextView.setText(mDataset[position]);
+        holder.mTextView.setText("test");
     }
 
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return mDataset.getSize();
     }
 
-
+    @Override
+    public int getItemViewType(int position) {
+        return mDataset.get(position).getType();
+    }
 }

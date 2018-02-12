@@ -7,25 +7,28 @@ import java.util.ArrayList;
  */
 
 public class RecyclerItem {
+    public String name;
+    public int id;
+    public int parentId = -1; // -1 if parent
+
+    public static final int ITEM_PARENT = 0;
+    public static final int ITEM_CHILD  = 1;
 
     public RecyclerItem(int id, String name) {
         this.name = name;
         this.id = id;
     }
 
-    public void addChildren(int childId){
-        if(childrenIds == null){
-            childrenIds = new ArrayList<>();
-        }
-        childrenIds.add(childId);
+    public RecyclerItem(int id, String name, int parentId) {
+        this.name = name;
+        this.id = id;
+        this.parentId = parentId;
     }
 
-    public ArrayList<Integer> getChildrenIds(){
-        return childrenIds;
+    public int getType(){
+        if(parentId == -1)
+            return ITEM_PARENT;
+        else
+            return  ITEM_CHILD;
     }
-
-    public String name;
-    public int id;
-    private ArrayList<Integer> childrenIds;
-
 }
