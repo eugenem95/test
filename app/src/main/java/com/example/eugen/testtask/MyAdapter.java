@@ -38,7 +38,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         switch (viewType){
             case RecyclerItem.ITEM_CHILD:
                 View vChild = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.child_view_holder_layout, parent, false);
+                        .inflate(R.layout.empty_view_holder_layout, parent, false);
                 vh = new ViewHolder(vChild);
                 break;
 
