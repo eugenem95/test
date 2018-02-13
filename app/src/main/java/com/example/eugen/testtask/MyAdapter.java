@@ -135,7 +135,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             public void onClick(View view) {
                 int itemPosition = mRecyclerView.getChildLayoutPosition(view);
                 mDataset.toggleItem(itemPosition);
-//                notifyDataSetChanged();
+                notifyDataSetChanged();
             }
         });
 
