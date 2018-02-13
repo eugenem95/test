@@ -32,10 +32,13 @@ public class MainActivity extends AppCompatActivity {
         data.addItem(3,"testItem03", 0);
 
         data.addItem(4,"testItem1");
-        data.addItem(4,"testItem11", 4);
-        data.addItem(5,"testItem12", 4);
-        data.addItem(6,"testItem13", 4);
+        data.addItem(5,"testItem11", 4);
+        data.addItem(6,"testItem12", 4);
+        data.addItem(7,"testItem13", 4);
 
+        data.toggleItem(0);
+        data.toggleItem(2);
+        data.toggleItem(3);
 
         mAdapter = new MyAdapter(data, mRecyclerView);
 
